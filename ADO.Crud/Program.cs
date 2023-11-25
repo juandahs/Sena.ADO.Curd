@@ -118,20 +118,27 @@ void FillTables()
             INSERT INTO t_aprendices VALUES (null, "Aprendiz 5", "Apellido 5", {random.Next(40)});
             INSERT INTO t_aprendices VALUES (null, "Aprendiz 6", "Apellido 6", {random.Next(40)});
             INSERT INTO t_aprendices VALUES (null, "Aprendiz 7", "Apellido 7", {random.Next(40)});
-
             """;
 
-        string rapInserts = """
-
+        string rapInserts = $"""
+            INSERT INTO rap VALUES (NULL, {random.Next(1000, 9999)}, "Nombre del rap {random.Next(99)}", {random.Next(1,10)});
+            INSERT INTO rap VALUES (NULL, {random.Next(1000, 9999)}, "Nombre del rap {random.Next(99)}", {random.Next(1,10)});
+            INSERT INTO rap VALUES (NULL, {random.Next(1000, 9999)}, "Nombre del rap {random.Next(99)}", {random.Next(1,10)});
+            INSERT INTO rap VALUES (NULL, {random.Next(1000, 9999)}, "Nombre del rap {random.Next(99)}", {random.Next(1,10)});
+            INSERT INTO rap VALUES (NULL, {random.Next(1000, 9999)}, "Nombre del rap {random.Next(99)}", {random.Next(1,10)});
+            INSERT INTO rap VALUES (NULL, {random.Next(1000, 9999)}, "Nombre del rap {random.Next(99)}", {random.Next(1,10)});
             """;
 
         if (sqlConnection == null)
             throw new Exception("No se ha creado la conexión");
 
 
-        SQLiteCommand command = new SQLiteCommand(aprendicesInserts, sqlConnection);
+        SQLiteCommand command = null;
         sqlConnection.Open();
         Console.WriteLine("Insertando datos");
+        command = new SQLiteCommand(aprendicesInserts, sqlConnection);
+        command.ExecuteNonQuery(); 
+        command = new SQLiteCommand(rapInserts, sqlConnection);
         command.ExecuteNonQuery();
         Console.WriteLine("Datos insertados correctamente");
 
